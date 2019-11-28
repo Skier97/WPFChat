@@ -1,0 +1,17 @@
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat.csprojAssemblyReference.cache
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\MainWindow.g.cs
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\App.g.cs
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat_MarkupCompile.cache
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat_MarkupCompile.lref
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\bin\Debug\WPFChat.exe.config
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\bin\Debug\WPFChat.exe
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\bin\Debug\WPFChat.pdb
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\MainWindow.baml
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat.g.resources
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat.Properties.Resources.resources
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat.csproj.GenerateResource.cache
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat.csproj.CopyComplete
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat.exe
+C:\Users\Пользователь\Desktop\Projects VS\WPFChat\WPFChat\obj\Debug\WPFChat.pdb
