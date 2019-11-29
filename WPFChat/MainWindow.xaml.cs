@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Net;
 using System.IO;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace WPFChat
 {
@@ -23,34 +24,58 @@ namespace WPFChat
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool flagTime = false;
         public MainWindow()
         {
             InitializeComponent();
+            /*while (flagTime == false)
+            {
+                Thread.Sleep(5000);
+                //Console.WriteLine("*** calling MyMethod *** ");
+                CheckNewMessage();
+            }*/
         }
 
         private void butAuth_Click(object sender, RoutedEventArgs e)
         {
-            RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Text);
+            RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Password);
             var req = request.MakeGetRequest(request.Url, request.Id, request.Password);
             var str = request.GetMessageUser(req);
             listMessages.Items.Clear();
-            listMessages.Items.Add(str);//TODO преобразовать потом уже в виде читабельных сообщений, а не JSON
+            flagTime = false;
+            var messages = JsonConvert.DeserializeObject<List<Message>>(str);
+            for (int i = 0; i < messages.Count; i++)
+            {
+                string outMess = "От кого: " + messages[i].IdSend + "\n" + "Сообщение: " + messages[i].TextMessage + "\n";
+                listMessages.Items.Add(outMess);
+            }
+            
+            //listMessages.Items.Add(str);//TODO преобразовать потом уже в виде читабельных сообщений, а не JSON
         }
 
         private void bExit_Click(object sender, RoutedEventArgs e)
         {
             listMessages.Items.Clear();
             tbId.Text = "";
-            tbPass.Text = "";
+            tbPass.Password = "";
+            flagTime = true;
         }
 
-        private void CheckNewMessage_Click(object sender, RoutedEventArgs e)
+        private void CheckNewMessage()
         {
-            RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Text);
-            var req = request.MakeGetRequest(request.Url, request.Id, request.Password);
-            var str = request.GetMessageUser(req);
-            listMessages.Items.Clear();
-            listMessages.Items.Add(str);
+            if ((tbId.Text != "")&&(tbPass.Password != ""))
+            {
+                RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Password);
+                var req = request.MakeGetRequest(request.Url, request.Id, request.Password);
+                var str = request.GetMessageUser(req);
+                listMessages.Items.Clear();
+                var messages = JsonConvert.DeserializeObject<List<Message>>(str);
+                for (int i = 0; i < messages.Count; i++)
+                {
+                    string outMess = "От кого: " + messages[i].IdSend + "\n" + "Сообщение: " + messages[i].TextMessage + "\n";
+                    listMessages.Items.Add(outMess);
+                }
+            }
         }
 
         private void bSend_Click(object sender, RoutedEventArgs e)

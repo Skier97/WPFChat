@@ -8,15 +8,14 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="tbLogin">
         <TextBox x:Name="tbId" HorizontalAlignment="Left" Height="23" Margin="635,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="tbPass" HorizontalAlignment="Left" Height="23" Margin="635,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="butAuth" Content="Войти" HorizontalAlignment="Left" Margin="648,129,0,0" VerticalAlignment="Top" Width="97" Height="28" Click="butAuth_Click"/>
         <ListBox x:Name="listMessages" HorizontalAlignment="Left" Height="230" Margin="299,22,0,0" VerticalAlignment="Top" Width="282"/>
         <Button x:Name="bExit" Content="Выйти" HorizontalAlignment="Left" Height="28" Margin="648,364,0,0" VerticalAlignment="Top" Width="97" Click="bExit_Click"/>
         <Label x:Name="label" Content="Написать сообщение" HorizontalAlignment="Left" Margin="66,17,0,0" VerticalAlignment="Top" Width="132"/>
         <TextBox x:Name="tbRecUser" HorizontalAlignment="Left" Height="23" Margin="78,60,0,0" TextWrapping="Wrap" Text="Кому" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="bSend" Content="Отправить" HorizontalAlignment="Left" Margin="122,285,0,0" VerticalAlignment="Top" Width="95" Height="25" Click="bSend_Click"/>
-        <Button x:Name="CheckNewMessage" Content="Проверить новые сообщения" HorizontalAlignment="Left" Margin="363,276,0,0" VerticalAlignment="Top" Width="178" Height="34" Click="CheckNewMessage_Click"/>
         <TextBox x:Name="tbNewMes" HorizontalAlignment="Left" Height="100" Margin="78,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
+        <PasswordBox x:Name="tbPass" HorizontalAlignment="Left" Margin="635,84,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
 
     </Grid>
 </Window>
