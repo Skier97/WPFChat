@@ -16,6 +16,7 @@
         <Button x:Name="bSend" Content="Отправить" HorizontalAlignment="Left" Margin="122,285,0,0" VerticalAlignment="Top" Width="95" Height="25" Click="bSend_Click"/>
         <TextBox x:Name="tbNewMes" HorizontalAlignment="Left" Height="100" Margin="78,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175"/>
         <PasswordBox x:Name="tbPass" HorizontalAlignment="Left" Margin="635,84,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+        <Button x:Name="button" Content="Проверить новые сообщения" HorizontalAlignment="Left" Margin="344,287,0,0" VerticalAlignment="Top" Width="199" Height="37" Click="button_Click"/>
 
     </Grid>
 </Window>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Configuration;
+using System.Collections.Specialized;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +18,7 @@ using System.Net;
 using System.IO;
 using Newtonsoft.Json;
 using System.Threading;
+
 
 namespace WPFChat
 {
@@ -38,19 +41,18 @@ namespace WPFChat
 
         private void butAuth_Click(object sender, RoutedEventArgs e)
         {
-            RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Password); //в конфиг
-            var req = request.MakeGetRequest(request.Url, request.Id, request.Password); //req и request не удачные наименования
-            var str = request.GetMessageUser(req);
+            RequestClass reqServer = new RequestClass(ConfigurationSettings.AppSettings["AddressServerUser"], Convert.ToInt32(tbId.Text), tbPass.Password); 
+            var reqUser = reqServer.MakeGetRequest(reqServer.Url, reqServer.Id, reqServer.Password); 
+            var strMess = reqServer.GetMessageUser(reqUser);
             listMessages.Items.Clear();
             flagTime = false;
-            var messages = JsonConvert.DeserializeObject<List<Message>>(str);
+            var messages = JsonConvert.DeserializeObject<List<Message>>(strMess);
             for (int i = 0; i < messages.Count; i++)
             {
                 string outMess = "От кого: " + messages[i].IdSend + "\n" + "Сообщение: " + messages[i].TextMessage + "\n";
                 listMessages.Items.Add(outMess);
             }
             
-            //listMessages.Items.Add(str);//TODO преобразовать потом уже в виде читабельных сообщений, а не JSON
         }
 
         private void bExit_Click(object sender, RoutedEventArgs e)
@@ -63,25 +65,13 @@ namespace WPFChat
 
         private void CheckNewMessage()
         {
-            if ((tbId.Text != "")&&(tbPass.Password != ""))
-            {
-                RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Password);
-                var req = request.MakeGetRequest(request.Url, request.Id, request.Password);
-                var str = request.GetMessageUser(req);
-                listMessages.Items.Clear(); //Оптимизировать вот эту штуку, возможно использовать флаг сообщении 
-                var messages = JsonConvert.DeserializeObject<List<Message>>(str);
-                for (int i = 0; i < messages.Count; i++)
-                {
-                    string outMess = "От кого: " + messages[i].IdSend + "\n" + "Сообщение: " + messages[i].TextMessage + "\n";
-                    listMessages.Items.Add(outMess);
-                }
-            }
+            
         }
 
         private void bSend_Click(object sender, RoutedEventArgs e)
         {
-            var request = new RequestClass("https://localhost:44326/api/user/AddMessage");
-            var req = WebRequest.Create("https://localhost:44326/api/user/AddMessage");
+            var request = new RequestClass(ConfigurationSettings.AppSettings["AddressServerMessage"]);
+            var req = WebRequest.Create(ConfigurationSettings.AppSettings["AddressServerMessage"]);
             Message message = new Message(Convert.ToInt32(tbId.Text),
                 Convert.ToInt32(tbRecUser.Text),
                 tbNewMes.Text);
@@ -89,6 +79,27 @@ namespace WPFChat
             request.MakePostReq(req, message);
             tbNewMes.Text = "";
             tbRecUser.Text = "";
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            if ((tbId.Text != "") && (tbPass.Password != ""))
+            {
+                RequestClass reqServer = new RequestClass(ConfigurationSettings.AppSettings["AddressServerUser"], Convert.ToInt32(tbId.Text), tbPass.Password);
+                var reqUser = reqServer.MakeGetRequest(reqServer.Url, reqServer.Id, reqServer.Password);
+                var strMess = reqServer.GetMessageUser(reqUser);
+                listMessages.Items.Clear(); //Оптимизировать вот эту штуку, возможно использовать флаг сообщении 
+                var messages = JsonConvert.DeserializeObject<List<Message>>(strMess);
+                for (int i = 0; i < messages.Count; i++)
+                {
+                    if (messages[i].IsRead == false)
+                    {
+                        string outMess = "От кого: " + messages[i].IdSend + "\n" + "Сообщение: " + messages[i].TextMessage + "\n";
+                        listMessages.Items.Add(outMess);
+                    }
+                    
+                }
+            }
         }
     }
 }
