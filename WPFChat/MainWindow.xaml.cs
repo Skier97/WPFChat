@@ -38,8 +38,8 @@ namespace WPFChat
 
         private void butAuth_Click(object sender, RoutedEventArgs e)
         {
-            RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Password);
-            var req = request.MakeGetRequest(request.Url, request.Id, request.Password);
+            RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Password); //в конфиг
+            var req = request.MakeGetRequest(request.Url, request.Id, request.Password); //req и request не удачные наименования
             var str = request.GetMessageUser(req);
             listMessages.Items.Clear();
             flagTime = false;
@@ -68,7 +68,7 @@ namespace WPFChat
                 RequestClass request = new RequestClass("https://localhost:44326/api/user/IsUser", Convert.ToInt32(tbId.Text), tbPass.Password);
                 var req = request.MakeGetRequest(request.Url, request.Id, request.Password);
                 var str = request.GetMessageUser(req);
-                listMessages.Items.Clear();
+                listMessages.Items.Clear(); //Оптимизировать вот эту штуку, возможно использовать флаг сообщении 
                 var messages = JsonConvert.DeserializeObject<List<Message>>(str);
                 for (int i = 0; i < messages.Count; i++)
                 {
